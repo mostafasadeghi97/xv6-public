@@ -64,6 +64,22 @@ void merge2(int arr[], int l, int m, int r)
     } 
 } 
 
+void mergeSort2(int arr[], int l, int r) 
+{ 
+    if (l < r) 
+    { 
+        // Same as (l+r)/2, but avoids overflow for 
+        // large l and h 
+        int m = l+(r-l)/2; 
+  
+        // Sort first and second halves 
+        mergeSort2(arr, l, m); 
+        mergeSort2(arr, m+1, r); 
+  
+        merge2(arr, l, m, r); 
+    } 
+} 
+
 
 void mergeSort(int a[], int l, int h) 
 { 
@@ -72,7 +88,7 @@ void mergeSort(int a[], int l, int h)
 	// Using insertion sort for small sized array 
 	if (len<=5) 
 	{ 
-		insertionSort(a+l, len); 
+		mergeSort2(a, l ,h);
 		return; 
 	} 
 
@@ -115,26 +131,6 @@ void mergeSort(int a[], int l, int h)
 	merge(a, l, l+len/2-1, h); 
 } 
 
-/* Function to sort an array using insertion sort*/
-void insertionSort(int arr[], int n) 
-{ 
-int i, key, j; 
-for (i = 1; i < n; i++) 
-{ 
-	key = arr[i]; 
-	j = i-1; 
-
-	/* Move elements of arr[0..i-1], that are 
-		greater than key, to one position ahead 
-		of their current position */
-	while (j >= 0 && arr[j] > key) 
-	{ 
-		arr[j+1] = arr[j]; 
-		j = j-1; 
-	} 
-	arr[j+1] = key; 
-} 
-} 
 
 // Method to merge sorted subarrays 
 void merge(int a[], int l1, int h1, int h2) 
