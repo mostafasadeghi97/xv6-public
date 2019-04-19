@@ -208,7 +208,7 @@ int main()
 
 	// Using fixed size array. We can uncomment 
 	// below lines to take size from user 
-	int length = 128; 
+	int length = 1000; 
 
 	/* printf("Enter No of elements of Array:"); 
 	scanf("%d",&length); */
