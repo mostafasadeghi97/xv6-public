@@ -5,6 +5,7 @@
 #include <stdio.h> 
 #include <stdlib.h> 
 #include <unistd.h> 
+#include<time.h>
 
 void insertionSort(int arr[], int n); 
 void merge(int a[], int l1, int h1, int h2); 
@@ -230,7 +231,13 @@ int main()
 		_exit(1); 
 	} 
 
-	// Create a random array of given length 
+	// Create a random array of given length
+	double total_time;
+	clock_t start, end;
+	start = clock();
+	//time count starts 
+	
+	
 	srand(time(NULL)); 
 	fillData(shm_array, length); 
 
@@ -239,9 +246,6 @@ int main()
 
 	// Check if array is sorted or not 
 	isSorted(shm_array, length); 
-
-	/* Detach from the shared memory now that we are 
-	done using it. */
 	if (shmdt(shm_array) == -1) 
 	{ 
 		perror("shmdt"); 
@@ -253,7 +257,10 @@ int main()
 	{ 
 		perror("shmctl"); 
 		_exit(1); 
-	} 
+	}
+	end = clock();
+	total_time = ((double) (end - start)) / _SC_CLK_TCK;
+	printf("\nTime taken: %f", total_time);
 
 	return 0; 
 } 
